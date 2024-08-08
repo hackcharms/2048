@@ -6,6 +6,8 @@ import FormInput from "./components/form/input.ts"
 import Grid from './grid.ts';
 import { Controller } from './controller.ts';
 import { Game2048 } from './2048.ts';
+import { Game2048Table } from './2048Table.ts';
+import { Game2048Grid } from './2048Grid.ts';
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -33,9 +35,9 @@ setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 window.customElements.define("form-input", FormInput);
 bindInputChange(document.querySelector<HTMLButtonElement>("#handleInput")!);
 const element=document.getElementById('grid');
-const game=new Game2048();
+const game=new Game2048Grid();
 game.attachEventListener();
-game.attachTable(element!);
+game.attachElement(element!);
 window.ctrl=game;
 // if(element){
 //   const gridLayout=Grid.slides(4).render(element);

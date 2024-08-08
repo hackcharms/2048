@@ -1,4 +1,4 @@
- enum ControllerKeysCode{
+export enum ControllerKeysCode{
     RIGHT='ArrowRight',
     LEFT='ArrowLeft',
     UP='ArrowUp',
@@ -10,7 +10,7 @@ export class Game2048{
     private _score=0;
     private availableNumbers:Set<number>=new Set()
     element:HTMLElement|null=null;
-    constructor(gridSize=4){
+    constructor(protected gridSize=4){
         this.grid = Array(gridSize).fill(0).map(()=>Array(gridSize).fill(0));
         this.availableNumbers.add(2)
         this.fillRandomTile(2)
@@ -130,56 +130,5 @@ export class Game2048{
             this.shift2DArray(this.grid,'positive',col)
         })
         this.print();
-    }
-    attachEventListener(){
-        document.addEventListener('keyup',(event:KeyboardEvent)=>{
-             if(event.key===ControllerKeysCode.LEFT){
-                this.left();
-            }
-            if(event.key===ControllerKeysCode.RIGHT){
-                this.right();
-            }
-            if(event.key===ControllerKeysCode.UP){
-                this.up();
-            }
-            if(event.key===ControllerKeysCode.DOWN){
-                this.down();
-            }
-            this.fillRandomTile();
-            this.attachTable();
-        })
-    }
-    createTable(){
-        const tableElement= document.createElement('table');
-        tableElement.classList.add('grid-table')
-        this.grid.forEach((row)=>{
-            const rowElement= document.createElement('tr');
-            row.forEach((col)=>{
-                const colElement=document.createElement('td');
-                colElement.classList.add('tile')
-                if(col){
-                    colElement.innerText=col+'';
-                    colElement.classList.add('active')
-                }
-                rowElement.appendChild(colElement);
-            });
-            tableElement.appendChild(rowElement);
-        })
-        return tableElement;
-    }
-    setDOMParent(element:HTMLElement){
-        this.element=element;
-    }
-    attachTable(element=this.element){
-        if(!element) return console.warn('please set the element')
-        if(!this.element) this.element=element;
-        if(element.firstElementChild){
-            element.removeChild(element.firstElementChild);
-            element.removeChild(element.firstElementChild);
-        }
-        const scoreElement= document.createElement('h4');
-        scoreElement.innerText= ' Score : '+ this.score;
-        element.appendChild(scoreElement)
-        element.appendChild(this.createTable());
     }
 }

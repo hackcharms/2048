@@ -99,10 +99,11 @@ button:focus-visible {
   }
 }
 
-/* .grid-wrapper{
+.grid-wrapper{
   --wrapper-size:600px;
   --spacing:8px;
   --grid-size:4;
+  --cell-size:calc(calc(var(--wrapper-size)/var(--grid-size)) - var(--spacing));
   display: grid;
   height: var(--wrapper-size);
   width: var(--wrapper-size);
@@ -113,20 +114,18 @@ button:focus-visible {
   position: relative;
 }
 .grid-wrapper .tile{
-  top: calc(var(--height) * var(--row) * 1px + var(--spacing));
-  left: calc(var(--width) * var(--col) * 1px + var(--spacing));
+  top: calc(var(--wrapper-size)/var(--grid-size) * var(--row) + var(--spacing));
+  left: calc(var(--wrapper-size)/var(--grid-size) * var(--col) + var(--spacing) );
   position:absolute;
-  width: calc(var(--wrapper-size)/var(--grid-size));
-  height: calc(var(--wrapper-size)/var(--grid-size));
-  margin-right: var(--spacing);
+  width: calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
+  height: calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
   display: flex;
   outline:1px solid;
   align-items: center;
   justify-content: center;
-  background-color: #f28553;
   transition:all 1s linear;
 }
-.tile::after{
+/* .tile::after{
   position: absolute;
   content: '';
   margin-right: var(--spacing);
@@ -164,9 +163,9 @@ button:focus-visible {
   height: 50px;
   border: 1px solid black;
 }
-.grid-table td.tile{
+.grid-table td.cell{
   background-color: #213547;
 }
-.grid-table td.active{
+.active{
   background-color: #21a547;
 }
