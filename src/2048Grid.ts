@@ -46,8 +46,6 @@ export class Game2048Grid extends Game2048{
         this.element=element;
     }
     resetGridValues(){
-        console.log('resetGridValues');
-        
         const tableElement= this.element?.lastElementChild;
         if(!tableElement) return;
         const cells= tableElement.childNodes as unknown as HTMLElement[];
@@ -65,6 +63,9 @@ export class Game2048Grid extends Game2048{
                 cellElement.style.setProperty('--row',rowI+'')
             });
         })
+        const header= this.element?.firstElementChild as HTMLElement;
+        header.innerText= ' Score : '+ this.score;
+
     }
     attachElement(element=this.element){
         if(!element) return console.warn('please set the element')
