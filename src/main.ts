@@ -5,6 +5,7 @@ import { setupCounter, bindInputChange } from "./counter.ts";
 import FormInput from "./components/form/input.ts"
 import Grid from './grid.ts';
 import { Controller } from './controller.ts';
+import { Game2048 } from './2048.ts';
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -32,13 +33,15 @@ setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 window.customElements.define("form-input", FormInput);
 bindInputChange(document.querySelector<HTMLButtonElement>("#handleInput")!);
 const element=document.getElementById('grid');
-if(element){
-  const gridLayout=Grid.slides(4).render(element);
-  const controller=new Controller(gridLayout.wrapper);
-  window.ctrl=controller;
-  console.log(controller.emptyCells(),controller.element)
-  controller.fillRandomTile(2)
-  gridLayout.wrapper
-}else{
-  console.log('grid element not found')
-}
+const game=new Game2048();
+game.attachEventListener();
+game.attachTable(element!);
+window.ctrl=game;
+// if(element){
+//   const gridLayout=Grid.slides(4).render(element);
+//   console.log(controller.emptyCells(),controller.element)
+//   controller.fillRandomTile(2)
+//   gridLayout.wrapper
+// }else{
+//   console.log('grid element not found')
+// }

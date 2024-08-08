@@ -99,28 +99,40 @@ button:focus-visible {
   }
 }
 
-.grid-wrapper{
-  --tile-size:80px;
+/* .grid-wrapper{
+  --wrapper-size:600px;
+  --spacing:8px;
+  --grid-size:4;
   display: grid;
+  height: var(--wrapper-size);
+  width: var(--wrapper-size);
   grid-template-columns: repeat(var(--grid-size),1fr);
   background-color: #535bf2;
   padding: 0.5rem;
   gap: .5rem;
+  position: relative;
 }
 .grid-wrapper .tile{
-  position:relative;
+  top: calc(var(--height) * var(--row) * 1px + var(--spacing));
+  left: calc(var(--width) * var(--col) * 1px + var(--spacing));
+  position:absolute;
+  width: calc(var(--wrapper-size)/var(--grid-size));
+  height: calc(var(--wrapper-size)/var(--grid-size));
+  margin-right: var(--spacing);
   display: flex;
   outline:1px solid;
-  aspect-ratio: 1;
   align-items: center;
   justify-content: center;
   background-color: #f28553;
+  transition:all 1s linear;
 }
-.tile[x-data-value]::after{
+.tile::after{
   position: absolute;
-  content: attr(x-data-value);
+  content: '';
+  margin-right: var(--spacing);
   top: 0;
   left: 0;
+  opacity: 0;
   display: grid;
   height: 100%;
   width: 100%;
@@ -128,9 +140,33 @@ button:focus-visible {
   justify-items: center;
   place-items: center;
   background-color: #242424;
+  transition:all .5s linear;
+}
+.tile[x-data-value]::after{
+  content: attr(x-data-value);
+  margin-right: var(--spacing);
+  z-index: 1;
+  outline:1px solid;
+  opacity: 1;
 }
 .tile::before{
   display: block;
   content:  attr(x-data-row) ',' attr(x-data-col);
   color: gray;
+} */
+.grid-table{
+  gap: 2px;
+  background-color: #213547;
+  color: white;
+}
+.grid-table td{
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+.grid-table td.tile{
+  background-color: #213547;
+}
+.grid-table td.active{
+  background-color: #21a547;
 }

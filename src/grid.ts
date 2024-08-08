@@ -8,7 +8,9 @@ export default {
             const tile= document.createElement('div');
             tile.classList.add('tile')
             tile.setAttribute('x-data-col',(index%value).toString())
+            tile.style.setProperty('--col',(index%value).toString())
             tile.setAttribute('x-data-row',((index/value)|0).toString())
+            tile.style.setProperty('--row',((index/value)|0).toString())
             this.wrapper.append(tile);
         });
         return this;
