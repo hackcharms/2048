@@ -1,72 +1,10 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  box-sizing: border-box;
 }
-.parent-class{
-  text-decoration: overline;
-  background-color: green;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
+/* *::before,*::after{
+  
+} */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -99,73 +37,81 @@ button:focus-visible {
   }
 }
 
+#grid{
+  background-color: #535bf2;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tiles-wrapper{
+  position: absolute;
+  top:0;
+  left:0;
+}
 .grid-wrapper{
   --wrapper-size:600px;
   --spacing:8px;
   --grid-size:4;
-  --cell-size:calc(calc(var(--wrapper-size)/var(--grid-size)) - var(--spacing));
-  display: grid;
-  height: var(--wrapper-size);
-  width: var(--wrapper-size);
-  grid-template-columns: repeat(var(--grid-size),1fr);
-  background-color: #535bf2;
-  padding: 0.5rem;
-  gap: .5rem;
+  --border-radius:4px;
+  --cell-size:calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
+  --bg-alpha:1;
+  --text-alpha:1;
   position: relative;
-}
-.grid-wrapper .tile{
-  top: calc(var(--wrapper-size)/var(--grid-size) * var(--row) + var(--spacing));
-  left: calc(var(--wrapper-size)/var(--grid-size) * var(--col) + var(--spacing) );
-  position:absolute;
-  width: calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
-  height: calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
-  display: flex;
-  outline:1px solid;
-  align-items: center;
-  justify-content: center;
-  transition:all 1s linear;
-}
-/* .tile::after{
-  position: absolute;
-  content: '';
-  margin-right: var(--spacing);
-  top: 0;
-  left: 0;
-  opacity: 0;
   display: grid;
-  height: 100%;
-  width: 100%;
-  margin: auto;
-  justify-items: center;
-  place-items: center;
-  background-color: #242424;
-  transition:all .5s linear;
+  height: calc(var(--wrapper-size) + var(--spacing));
+  width: calc(var(--wrapper-size) + var(--spacing));
+  grid-template-rows: repeat(var(--grid-size),1fr);
+  grid-template-columns: repeat(var(--grid-size),1fr);
+  gap: var(--spacing);
+  padding: var(--spacing);
+}
+.grid-wrapper .cell{
+  background-color: #d58080;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  border-radius: var(--border-radius);
+
+}
+
+.tile{
+  top: calc((var(--cell-size) + var(--spacing)) * var(--row) + var(--spacing));
+  left: calc((var(--cell-size) + var(--spacing)) * var(--col) + var(--spacing));
+  position:absolute;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  border-radius: var(--border-radius);
+  opacity: 0;
+  background: rgba(127, 176, 195, var(--bg-alpha));
+}
+.tile[x-data-value]{
+  opacity:1 ;
+  color:rgba(255, 255, 255,var(--text-alpha));
+  transition:all 500ms linear;
+  animation: pop-in 500ms ease-in;
 }
 .tile[x-data-value]::after{
+  font-size: xx-large;
+  font-weight: bolder;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   content: attr(x-data-value);
-  margin-right: var(--spacing);
-  z-index: 1;
-  outline:1px solid;
-  opacity: 1;
+  opacity:1 ;
 }
-.tile::before{
-  display: block;
-  content:  attr(x-data-row) ',' attr(x-data-col);
-  color: gray;
-} */
-.grid-table{
-  gap: 2px;
-  background-color: #213547;
-  color: white;
-}
-.grid-table td{
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-}
-.grid-table td.cell{
-  background-color: #213547;
-}
-.active{
-  background-color: #21a547;
+
+@keyframes pop-in{
+  0%{
+    opacity: 0;
+    transform: scale(0);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
 }
