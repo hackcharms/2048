@@ -2,9 +2,6 @@
 *{
   box-sizing: border-box;
 }
-/* *::before,*::after{
-  
-} */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -37,17 +34,22 @@ button:focus-visible {
   }
 }
 
-#grid{
-  background-color: #535bf2;
-  padding: 10px;
+body{
+  --dark-bg: #1e1e1eaf ;
+  --light-bg: #F9F7FE ;
+  --dark-text: #000000 ;
+  --light-text: #204C6E ;
+  color-scheme: light dark;
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+  color: light-dark(var(--light-text), var(--dark-text));
+}
+#app{
+  min-width: 100dvw;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.tiles-wrapper{
-  position: absolute;
-  top:0;
-  left:0;
 }
 .grid-wrapper{
   --wrapper-size:600px;
@@ -67,11 +69,18 @@ button:focus-visible {
   padding: var(--spacing);
 }
 .grid-wrapper .cell{
-  background-color: #d58080;
+  background-color: light-dark(#cbced3,#4c4c4dfa);
   height: var(--cell-size);
   width: var(--cell-size);
   border-radius: var(--border-radius);
 
+}
+.score-wrapper{
+  font-size: xx-large;
+  padding: 0.25rem 0.75rem;
+}
+.score-wrapper .score{
+  font-weight: bolder;
 }
 
 .tile{
@@ -82,11 +91,18 @@ button:focus-visible {
   width: var(--cell-size);
   border-radius: var(--border-radius);
   opacity: 0;
-  background: hsl(129, 53%, var(--bg-alpha));
+  background-color: light-dark(hsl(206, 46%, var(--bg-alpha)) , hsl(206, 55%, var(--bg-alpha)));
+  color:  hsl(206, 55%, var(--text-alpha))
+  /* color:  light-dark(hsl(206, 55%, var(--text-alpha)),hsl(206, 55%, var(--text-alpha))); */
+  
+}
+.tile.secondary{
+  background-color: light-dark(hsl(195, 100%, var(--bg-alpha)) , hsl(195, 100%, var(--bg-alpha)));
+  /* color: light-dark(hsl(206, 55%, var(--text-alpha)) , hsl(206, 55%, var(--text-alpha))); */
+  color: hsl(206, 55%, var(--text-alpha));
 }
 .tile[x-data-value]{
   opacity:1 ;
-  color:hsl(239, 93%, var(--text-alpha));
   transition:all 500ms linear;
   animation: pop-in 500ms ease-in;
 }
@@ -101,7 +117,17 @@ button:focus-visible {
   content: attr(x-data-value);
   opacity:1 ;
 }
-
+.merged{
+  animation: zoom-in 500ms ease !important;
+}
+@keyframes zoom-in{
+  0%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(1.5);
+  }
+}
 @keyframes pop-in{
   0%{
     opacity: 0;

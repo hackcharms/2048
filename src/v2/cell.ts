@@ -34,6 +34,14 @@ export default class Cell {
       (this.mergeTile == null && this.tile.getValue === tile.getValue)
     );
   }
+  mergeTiles() {
+    if (this.tile == null || this.mergeTile == null) return;
+    this.tile.setValue = this.tile.getValue + this.mergeTile.getValue;
+    this.mergeTile.remove();
+    this.mergeTile = undefined;
+    return this.tile.getValue;
+  }
+
   set setMergeTile(value: Tile) {
     this.mergeTile = value;
     if (value == null) return;

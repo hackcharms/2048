@@ -9,9 +9,25 @@ export default class Controller {
   static ARROW_LEFT = "ArrowLeft";
   private grid: Grid;
   private element: HTMLElement;
+  private scoreElement: HTMLElement;
+  private score: number = 0;
 
-  constructor(element: HTMLElement, gridSize: number = 4) {
+  constructor(
+    element: HTMLElement,
+    gridSize: number = 4,
+    scoreElement?: HTMLElement
+  ) {
     this.element = element;
+    if (!scoreElement) {
+      scoreElement = document.createElement("h1");
+      scoreElement.innerText = "Score: ";
+      this.scoreElement = document.createElement("span");
+      scoreElement.append(this.scoreElement);
+      this.element.parentElement?.prepend(scoreElement);
+    } else {
+      this.scoreElement = scoreElement;
+    }
+    this.scoreElement.innerText = this.score.toString();
     this.grid = new Grid(this.element, gridSize);
     this.attachEventListener();
     this.generateRandomTiles(2);
@@ -26,22 +42,44 @@ export default class Controller {
     for (let i = 0; i < count; i++) {
       const tile = this.grid.getRandomEmptyCells;
       tile.setTile = new Tile(this.element);
-      console.log("tile", tile);
     }
   }
+  set setScore(value: number) {
+    this.score = value;
+    this.scoreElement.innerText = this.score?.toString();
+  }
+  get getScore() {
+    return this.score;
+  }
 
-  inputHandler(event: KeyboardEvent) {
+  async inputHandler(event: KeyboardEvent) {
     if (event.key === Controller.ARROW_UP) {
-      this.slideUp();
+      await this.slideUp();
     }
     if (event.key === Controller.ARROW_DOWN) {
-      this.slideDown();
+      await this.slideDown();
     }
     if (event.key === Controller.ARROW_RIGHT) {
-      this.slideRight();
+      await this.slideRight();
     }
     if (event.key === Controller.ARROW_LEFT) {
-      this.slideLeft();
+      await this.slideLeft();
+    }
+    this.grid.getCells.forEach((cell) => {
+      this.setScore = this.getScore + (cell.mergeTiles() || 0);
+    });
+    const newTile = new Tile(this.element);
+    this.grid.getRandomEmptyCells.setTile = newTile;
+    if (
+      !this.canMoveUp() &&
+      !this.canMoveDown() &&
+      !this.canMoveLeft() &&
+      !this.canMoveRight()
+    ) {
+      newTile.waitForTransition(true).then(() => {
+        alert("You lose");
+      });
+      return;
     }
     this.attachEventListener();
   }
