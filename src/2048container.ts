@@ -9,5 +9,5 @@ Score : <span id="score" class="score"></span>
 const element = document.getElementById("248-wrapper");
 const scoreElement = document.getElementById("score") || undefined;
 const gameBoard = new Controller(element!, 4, scoreElement);
-
+//@ts-ignore
 window.controller = gameBoard;

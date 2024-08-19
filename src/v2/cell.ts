@@ -17,6 +17,9 @@ export default class Cell {
   get getTile() {
     return this.tile;
   }
+  get getElement() {
+    return this.element;
+  }
   set setTile(tile: Tile | undefined) {
     this.tile = tile;
     if (!this.tile) return;

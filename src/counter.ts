@@ -5,11 +5,11 @@ export async function setupCounter(element: HTMLButtonElement) {
     element.innerHTML = `count is ${counter}`
   }
   function promiseTest(){
-    return new Promise((resolve,reject)=>{
-      window.setTimeout(()=>{
-        return resolve('hello there');
-      },5_000);
-    })
+    return new Promise((resolve) => {
+      window.setTimeout(() => {
+        return resolve("hello there");
+      }, 5_000);
+    });
   }
 
   console.log( promiseTest());

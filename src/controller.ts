@@ -98,49 +98,67 @@ export class Controller{
         })
     }
     left(){
-        this.filledCells().forEach((tile,index)=>{
-            const row= tile.getAttribute(Controller.ROW_SELECTOR);
-            this.shiftRows(parseInt(row!),'left')
-            const availableRowCells=this.element.querySelectorAll<HTMLDivElement>(`.tile[${Controller.ROW_SELECTOR}="${row}"][${Controller.VALUE_SELECTOR}]`);
-            let lastValue=availableRowCells[availableRowCells.length-1].getAttribute(Controller.VALUE_SELECTOR);
-            let pCell=availableRowCells[availableRowCells.length-1] 
-            let availableIndex = availableRowCells.length-2;
-            for(;availableIndex>=0;availableIndex--){
-                const cell=availableRowCells[availableIndex]
-                const value= cell.getAttribute(Controller.VALUE_SELECTOR);
-                if(value && value===lastValue){
-                    cell.setAttribute(Controller.VALUE_SELECTOR,(+value*2).toString())
-                    this.availableNumbers.add(+value*2)
-                    pCell.removeAttribute(Controller.VALUE_SELECTOR)
-                }
-                lastValue=value;
-                pCell=cell;
+        this.filledCells().forEach((tile) => {
+          const row = tile.getAttribute(Controller.ROW_SELECTOR);
+          this.shiftRows(parseInt(row!), "left");
+          const availableRowCells =
+            this.element.querySelectorAll<HTMLDivElement>(
+              `.tile[${Controller.ROW_SELECTOR}="${row}"][${Controller.VALUE_SELECTOR}]`
+            );
+          let lastValue = availableRowCells[
+            availableRowCells.length - 1
+          ].getAttribute(Controller.VALUE_SELECTOR);
+          let pCell = availableRowCells[availableRowCells.length - 1];
+          let availableIndex = availableRowCells.length - 2;
+          for (; availableIndex >= 0; availableIndex--) {
+            const cell = availableRowCells[availableIndex];
+            const value = cell.getAttribute(Controller.VALUE_SELECTOR);
+            if (value && value === lastValue) {
+              cell.setAttribute(
+                Controller.VALUE_SELECTOR,
+                (+value * 2).toString()
+              );
+              this.availableNumbers.add(+value * 2);
+              pCell.removeAttribute(Controller.VALUE_SELECTOR);
             }
-            
-        })
+            lastValue = value;
+            pCell = cell;
+          }
+        });
         this.fillRandomTile()
     }
     right(){
-        this.filledCells().forEach((tile,index)=>{
-            const row= tile.getAttribute(Controller.ROW_SELECTOR);
-            this.shiftRows(parseInt(row!),'right')
-            const availableRowCells=this.element.querySelectorAll(`.tile[${Controller.ROW_SELECTOR}="${row}"][${Controller.VALUE_SELECTOR}]`);
-            let lastValue=availableRowCells[0].getAttribute(Controller.VALUE_SELECTOR);
-            let pCell=availableRowCells[0]
-            let availableIndex = 1;
-            for(;availableIndex<=availableRowCells.length-1;availableIndex++){
-                const cell=availableRowCells[availableIndex]
-                const value= cell.getAttribute(Controller.VALUE_SELECTOR);
-                if(value && value===lastValue){
-                    cell.setAttribute(Controller.VALUE_SELECTOR,(+value*2).toString())
-                    pCell.removeAttribute(Controller.VALUE_SELECTOR)
-                    this.availableNumbers.add(+value*2)
-                    // availableIndex++;
-                }
-                lastValue=value;
-                pCell=cell;
+        this.filledCells().forEach((tile) => {
+          const row = tile.getAttribute(Controller.ROW_SELECTOR);
+          this.shiftRows(parseInt(row!), "right");
+          const availableRowCells = this.element.querySelectorAll(
+            `.tile[${Controller.ROW_SELECTOR}="${row}"][${Controller.VALUE_SELECTOR}]`
+          );
+          let lastValue = availableRowCells[0].getAttribute(
+            Controller.VALUE_SELECTOR
+          );
+          let pCell = availableRowCells[0];
+          let availableIndex = 1;
+          for (
+            ;
+            availableIndex <= availableRowCells.length - 1;
+            availableIndex++
+          ) {
+            const cell = availableRowCells[availableIndex];
+            const value = cell.getAttribute(Controller.VALUE_SELECTOR);
+            if (value && value === lastValue) {
+              cell.setAttribute(
+                Controller.VALUE_SELECTOR,
+                (+value * 2).toString()
+              );
+              pCell.removeAttribute(Controller.VALUE_SELECTOR);
+              this.availableNumbers.add(+value * 2);
+              // availableIndex++;
             }
-        })
+            lastValue = value;
+            pCell = cell;
+          }
+        });
         this.fillRandomTile()
     }
     up(){

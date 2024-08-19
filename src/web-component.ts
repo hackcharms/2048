@@ -2,12 +2,8 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter, bindInputChange } from "./counter.ts";
-import FormInput from "./components/form/input.ts"
-import Grid from './grid.ts';
-import { Controller } from './controller.ts';
-import { Game2048 } from './2048.ts';
-import { Game2048Table } from './2048Table.ts';
-import { Game2048Grid } from './2048Grid.ts';
+import FormInput from "./components/form/input.ts";
+import { Game2048Grid } from "./2048Grid.ts";
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -42,7 +38,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           <div class="cell"></div>
           <div class="cell"></div>
           <div class="cell"></div>
-          <div class="cell"></div>
+          <‸div class="cell"></div>
           <div class="cell"></div>
           <div class="cell"></div>
           <div class="tile" style="--row:0;--col:0;"></div>

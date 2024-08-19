@@ -37,8 +37,8 @@ button:focus-visible {
 body{
   --dark-bg: #1e1e1eaf ;
   --light-bg: #F9F7FE ;
-  --dark-text: #000000 ;
-  --light-text: #204C6E ;
+  --dark-text: #76C0F6 ;
+  --light-text: #000000 ;
   color-scheme: light dark;
   background-color: light-dark(var(--light-bg), var(--dark-bg));
   color: light-dark(var(--light-text), var(--dark-text));
