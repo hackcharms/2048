@@ -5,7 +5,6 @@ export default class Grid {
   private SPACING = 8;
   private GRID_SIZE = 4;
   private BORDER_RADIUS = 4;
-  // private CELL_SIZE=40;
   private cells: Cell[] = [];
   private wrapperElement: HTMLElement;
 
@@ -47,14 +46,14 @@ export default class Grid {
     return emptyCells[(Math.random() * emptyCells.length) | 0];
   }
 
-  get cellsByRow() {
+  get cellsByCols() {
     return this.cells.reduce((cellGrid: Cell[][], cell) => {
       cellGrid[cell.getCol] = cellGrid[cell.getCol] || [];
       cellGrid[cell.getCol][cell.getRow] = cell;
       return cellGrid;
     }, []);
   }
-  get cellsByCols() {
+  get cellsByRows() {
     return this.cells.reduce((cellGrid: Cell[][], cell) => {
       cellGrid[cell.getRow] = cellGrid[cell.getRow] || [];
       cellGrid[cell.getRow][cell.getCol] = cell;

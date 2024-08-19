@@ -55,8 +55,8 @@ button:focus-visible {
   --grid-size:4;
   --border-radius:4px;
   --cell-size:calc(var(--wrapper-size)/var(--grid-size) - var(--spacing));
-  --bg-alpha:1;
-  --text-alpha:1;
+  --bg-alpha:10%;
+  --text-alpha:10%;
   position: relative;
   display: grid;
   height: calc(var(--wrapper-size) + var(--spacing));
@@ -80,16 +80,13 @@ button:focus-visible {
   position:absolute;
   height: var(--cell-size);
   width: var(--cell-size);
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
   border-radius: var(--border-radius);
   opacity: 0;
-  background: rgba(127, 176, 195, var(--bg-alpha));
+  background: hsl(129, 53%, var(--bg-alpha));
 }
 .tile[x-data-value]{
   opacity:1 ;
-  color:rgba(255, 255, 255,var(--text-alpha));
+  color:hsl(239, 93%, var(--text-alpha));
   transition:all 500ms linear;
   animation: pop-in 500ms ease-in;
 }

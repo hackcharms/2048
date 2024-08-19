@@ -1,8 +1,8 @@
 import Tile from "./tile";
 
 export default class Cell {
-  private tile: Tile;
-  private mergeTile: Tile;
+  private tile?: Tile;
+  private mergeTile?: Tile;
   constructor(
     private element: HTMLElement,
     private row: number,
@@ -17,9 +17,9 @@ export default class Cell {
   get getTile() {
     return this.tile;
   }
-  set setTile(tile: Tile) {
+  set setTile(tile: Tile | undefined) {
     this.tile = tile;
-    if (tile == null) return;
+    if (!this.tile) return;
     this.tile.setCol = this.col;
     this.tile.setRow = this.row;
   }
@@ -28,6 +28,12 @@ export default class Cell {
     return this.mergeTile;
   }
 
+  canCombine(tile: Tile) {
+    return (
+      !this.tile ||
+      (this.mergeTile == null && this.tile.getValue === tile.getValue)
+    );
+  }
   set setMergeTile(value: Tile) {
     this.mergeTile = value;
     if (value == null) return;
