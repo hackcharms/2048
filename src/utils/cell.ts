@@ -42,6 +42,9 @@ export default class Cell {
     this.tile.setValue = this.tile.getValue + this.mergeTile.getValue;
     this.mergeTile.remove();
     this.mergeTile = undefined;
+    this.tile.waitForTransition().then(()=>{
+      this.tile?.setClass('merged');
+    })
     return this.tile.getValue;
   }
 
