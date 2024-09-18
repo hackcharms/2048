@@ -53,6 +53,9 @@ export default class Controller {
   }
 
   async inputHandler(event: KeyboardEvent) {
+    if (event.key && ![Controller.ARROW_DOWN, Controller.ARROW_UP, Controller.ARROW_LEFT, Controller.ARROW_RIGHT].includes(event.key)) {
+      return this.attachEventListener();
+    }
     if (event.key === Controller.ARROW_UP) {
       await this.slideUp();
     }
