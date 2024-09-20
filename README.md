@@ -13,3 +13,11 @@
                 Slide Down                  
 ```
 <img src="https://github.com/hackcharms/2048/blob/main/public/image.png?raw=true" alt="preview image">
+
+
+
+## Todo
+- [ ] Show Highest score
+- [ ] Mobile swipe implementation
+- [ ] Persistent state, if user leave the page and came back it should show the last state
+- [ ] Fix animation glitch
